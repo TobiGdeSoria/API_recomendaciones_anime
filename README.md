@@ -44,6 +44,7 @@ python main.py
 
 - Ingresa tu **ID de usuario** (o escribe `quit` para salir).
 - Ingresa el **nombre de un anime** que te guste.
+    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado       de animes que coinciden. Encontrando así el anime que buscas. 
 - Ingresa una **calificación** para ese anime (1–10).
 - Visualiza las **10 principales recomendaciones**.
 
