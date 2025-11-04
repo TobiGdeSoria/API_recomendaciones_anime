@@ -28,7 +28,7 @@ pip install rich
 
 .
 ├── main.py                 # Programa principal con interacción del usuario
-├── corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida)
+├── corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida) **--> aparece una vez ejecutada la aplicación por primera vez**
 ├── reccs.py                # Clase AnimeRecomendacion (lógica de recomendaciones)
 ├── rating_limpiado.csv     # Archivo CSV de calificaciones de usuarios
 ├── anime.csv               # Archivo CSV de información de anime
@@ -49,9 +49,9 @@ python main.py
 - Elije entre las opciones del menú:
         - Obtener recomendaciones.
                 - Ingresa el **nombre de un anime** que te guste.
-                    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado       de animes que coinciden. Encontrando así el                           anime que buscas. 
+                    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
                 - Ingresa una **calificación** para ese anime (1–10).
-                - Visualiza las **10 principales recomendaciones**.
+                - Visualiza las **15 principales recomendaciones**.
         - Ver tus animes calificados.
         - Cambiar de usuario.
 
@@ -60,17 +60,19 @@ python main.py
 ## EJEMPLO PEDIR RECOMENDACIONES
 
 
---- RECOMENDACIONES ---
+--- SISTEMA DE RECOMENDACIONES DE ANIME ---
 Inserte tu ID de usuario (o escriba 'quit' para salir): 123
+
+--- MENÚ ---
 Seleccione una opción (1–4): 1 (Obtener recomendaciones)
-Escriba el nombre del anime: naruto
+Escriba el nombre del anime: bleach
 Escriba el rating del anime (1–10): 8
 
 Top 10 recomendaciones
 ========================================
-Bleach (score: 4.42)
-Pokemon Advanced Generation (score: 3.87)
-Dragon Ball Z (score: 5.75)
+Naruto (score: 4.42)
+Fairy Tail (score: 4.30)
+Dragon Ball GT (score: 4.08)
 ...
 
 ---
