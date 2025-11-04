@@ -1,13 +1,13 @@
-Esta es una aplicación en Python que sugiere los mejores animes basados en las calificaciones de los usuarios. Los usuarios pueden ingresar un anime que les guste y su calificación, y la aplicación proporcionará una lista de recomendaciones.
+Esta es una aplicación en Python que sugiere los mejores animes basados en las calificaciones de los usuarios. Los usuarios entran en su usuario, y se les dará la opción de ver que animes ha calificado, o ingresar un anime que les guste y su calificación, la aplicación automaticamente proporcionará una lista de recomendaciones.
 
 ---
 
 ## FUNCIONALIDADES
 
-- Cargar datos de anime y calificaciones de usuarios desde archivos CSV.
+- Cargar datos de anime y calificaciones de usuarios desde archivos CSV o JSON.
 - Calcular puntuaciones de similitud entre animes según las calificaciones.
 - Recomendar los 10 mejores animes similares al ingresado por el usuario.
-- Interfaz interactiva de línea de comandos.
+- Interfaz interactiva y creativa de línea de comandos.
 
 ---
 
@@ -15,10 +15,12 @@ Esta es una aplicación en Python que sugiere los mejores animes basados en las 
 
 - Python 3.8+
 - pandas
+- rich
 
 Instalar paquetes necesarios con pip:
 
 pip install pandas
+pip install rich
 
 ---
 
@@ -26,6 +28,7 @@ pip install pandas
 
 .
 ├── main.py                 # Programa principal con interacción del usuario
+├── corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida)
 ├── reccs.py                # Clase AnimeRecomendacion (lógica de recomendaciones)
 ├── rating_limpiado.csv     # Archivo CSV de calificaciones de usuarios
 ├── anime.csv               # Archivo CSV de información de anime
@@ -43,25 +46,31 @@ python main.py
 3. Sigue las instrucciones:
 
 - Ingresa tu **ID de usuario** (o escribe `quit` para salir).
-- Ingresa el **nombre de un anime** que te guste.
-    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado       de animes que coinciden. Encontrando así el anime que buscas. 
-- Ingresa una **calificación** para ese anime (1–10).
-- Visualiza las **10 principales recomendaciones**.
+- Elije entre las opciones del menú:
+        - Obtener recomendaciones.
+                - Ingresa el **nombre de un anime** que te guste.
+                    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado       de animes que coinciden. Encontrando así el                           anime que buscas. 
+                - Ingresa una **calificación** para ese anime (1–10).
+                - Visualiza las **10 principales recomendaciones**.
+        - Ver tus animes calificados.
+        - Cambiar de usuario.
 
 ---
 
-## EJEMPLO
+## EJEMPLO PEDIR RECOMENDACIONES
+
 
 --- RECOMENDACIONES ---
 Inserte tu ID de usuario (o escriba 'quit' para salir): 123
-Escriba el nombre del anime: Naruto
+Seleccione una opción (1–4): 1 (Obtener recomendaciones)
+Escriba el nombre del anime: naruto
 Escriba el rating del anime (1–10): 8
 
 Top 10 recomendaciones
 ========================================
-Bleach (score: 64.25)
-One Piece (score: 60.10)
-Dragon Ball Z (score: 58.75)
+Bleach (score: 4.42)
+Pokemon Advanced Generation (score: 3.87)
+Dragon Ball Z (score: 5.75)
 ...
 
 ---
