@@ -46,9 +46,10 @@ def main():
             console.print("1.- Obtener recomendaciones (JSON)")
             console.print("2.- Ver animes calificados")
             console.print("3.- Cambiar de usuario")
-            console.print("4.- Salir")
+            console.print("4.- Agregar/Actualizar calificación de un anime")
+            console.print("5.- Salir")
 
-            opcion = input("Seleccione una opción (1–4): ").strip()
+            opcion = input("Seleccione una opción (1–5): ").strip()
 
             if opcion == "1":
                 while True:
@@ -111,11 +112,70 @@ def main():
                 break
 
             elif opcion == "4":
+                while True:
+                    nombre_anime = input("Escriba el nombre del anime a calificar (o 'quit' para volver): ").strip()
+                    if nombre_anime.lower() == 'quit':
+                        break
+
+                    lower_input = nombre_anime.lower()
+                    matches = recomendacion.animes[
+                        recomendacion.animes['name'].str.lower().str.contains(lower_input, na=False)
+                    ]
+
+                    if nombre_anime.lower() not in recomendacion.animes['name'].str.lower().values:
+                        if not matches.empty:
+                            console.print("\n[bold khaki1]No se encontró un anime con ese nombre exacto, pero encontramos coincidencias:[/bold khaki1]")
+                            for name in matches['name']:
+                                console.print(f"- {name}")
+                            console.print("\nPor favor, intenta escribir el nombre nuevamente.")
+                            continue
+                        else:
+                            console.print(f"\n[bold red]El anime '{nombre_anime}' no se encuentra en la base de datos.[/bold red]")
+                            continue
+                    break
+
+                try:
+                    rating_value = float(input("Escriba la calificación (1–10): ").strip())
+                    if not (1 <= rating_value <= 10):
+                        raise ValueError
+                except ValueError:
+                    console.print("[bold red]Input inválido. Por favor inserte un número del 1 al 10.[/bold red]")
+                    continue
+
+                anime_row = recomendacion.animes[recomendacion.animes['name'].str.lower() == nombre_anime.lower()]
+                anime_id = anime_row['anime_id'].values[0]
+
+                existing_index = ratings_df[
+                    (ratings_df['user_id'] == user_id) & (ratings_df['anime_id'] == anime_id)
+                ].index
+
+                if not existing_index.empty:
+                    ratings_df.loc[existing_index[0], 'rating'] = rating_value
+                    console.print(f"[bold yellow]Calificación actualizada para '{nombre_anime}'[/bold yellow]")
+                else:
+                    new_row = pd.DataFrame({'user_id': [user_id], 'anime_id': [anime_id], 'rating': [rating_value]})
+                    ratings_df = pd.concat([ratings_df, new_row], ignore_index=True)
+                    console.print(f"[bold green]Calificación agregada correctamente para '{nombre_anime}'[/bold green]")
+
+                ratings_df.to_csv(DIRECTORIO_RATINGS, index=False, encoding="ISO-8859-1")
+
+                with Progress(
+                    SpinnerColumn(),
+                    TextColumn("[progress.description]{task.description}"),
+                    transient=True,
+                    console=console
+                ) as progress:
+                    progress.add_task(description="Actualizando matriz de correlación. Esto tardará un rato...", total=None)
+                    recomendacion.update_correlation(ratings_df)
+
+                console.print("[bold green]Matriz de correlación actualizada.[/bold green]")
+            
+            elif opcion == "5":
                 console.print("[bold green]Hasta pronto! :][/bold green]")
                 sys.exit()
 
             else:
-                console.print("[bold red]Opción inválida. Por favor elige entre 1 y 4.[/bold red]")
+                console.print("[bold red]Opción inválida. Por favor elige entre 1 y 5.[/bold red]")
 
 
 if __name__ == "__main__":

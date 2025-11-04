@@ -3,6 +3,7 @@ import html
 import os
 import pickle
 
+
 class AnimeRecomendacion:
     def __init__(self, directorio_ratings, directorio_anime, cache_file="corr_matrix.pkl"):
         self.directorio_ratings = directorio_ratings
@@ -31,10 +32,17 @@ class AnimeRecomendacion:
             with open(self.cache_file, "rb") as f:
                 self.corrMatrix = pickle.load(f)
         else:
-            userRatings = self.ratings.pivot_table(index='user_id', columns='anime_id', values='rating')
-            self.corrMatrix = userRatings.corr(method='pearson', min_periods=500)
-            with open(self.cache_file, "wb") as f:
-                pickle.dump(self.corrMatrix, f)
+            self._compute_correlation(self.ratings)
+
+    def _compute_correlation(self, ratings_df):
+        userRatings = ratings_df.pivot_table(index='user_id', columns='anime_id', values='rating')
+        self.corrMatrix = userRatings.corr(method='pearson', min_periods=500)
+        with open(self.cache_file, "wb") as f:
+            pickle.dump(self.corrMatrix, f)
+
+    def update_correlation(self, ratings_df):
+        """Recompute the correlation matrix after adding new ratings."""
+        self._compute_correlation(ratings_df)
 
     def get_recommendations(self, anime_name, rating_value):
         anime_row = self.animes[self.animes['name'].str.lower() == anime_name.lower()]
