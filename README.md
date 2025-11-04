@@ -61,7 +61,7 @@ python main.py
 
 
 --- SISTEMA DE RECOMENDACIONES DE ANIME ---
-Inserte tu ID de usuario (o escriba 'quit' para salir): 123
+Inserte tu ID de usuario (o escriba 'quit' para salir): 23
 
 --- MENÚ ---
 Seleccione una opción (1–4): 1 (Obtener recomendaciones)
