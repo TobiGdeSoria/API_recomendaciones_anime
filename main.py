@@ -13,7 +13,7 @@ console = Console()
 
 
 def main():
-    console.print("[bold aquamarine1]Cargando y entrenando el sistema de recomendaciones.[/bold aquamarine1]")
+    console.print("[bold khaki1]Cargando y entrenando el sistema de recomendaciones.[/bold khaki1]")
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -27,7 +27,7 @@ def main():
     ratings_df = pd.read_csv(DIRECTORIO_RATINGS)
 
     while True:
-        console.print("\n[bold cyan]--- SISTEMA DE RECOMENDACIONES DE ANIME ---[/bold cyan]")
+        console.print("\n[bold aquamarine1]--- SISTEMA DE RECOMENDACIONES DE ANIME ---[/bold aquamarine1]")
         user_input = input("Inserte tu ID de usuario (o escribe 'exit' para salir): ").strip()
 
         if user_input.lower() == 'exit':
@@ -39,10 +39,10 @@ def main():
             continue
 
         user_id = int(user_input)
-        console.print(f"ID de usuario ingresado: [bold orange3]{user_id}[/bold orange3]")
+        console.print(f"ID de usuario ingresado: [bold khaki1]{user_id}[/bold khaki1]")
 
         while True:
-            console.print("\n[bold light_steel_blue]--- MENÚ ---[/bold light_steel_blue]")
+            console.print("\n[bold steel_blue1]--- MENÚ ---[/bold steel_blue1]")
             console.print("1.- Obtener recomendaciones (JSON)")
             console.print("2.- Ver animes calificados")
             console.print("3.- Cambiar de usuario")
@@ -63,7 +63,7 @@ def main():
 
                     if nombre_anime.lower() not in recomendacion.animes['name'].str.lower().values:
                         if not matches.empty:
-                            console.print("\n[bold orange3]No se encontró un anime con ese nombre exacto, pero encontramos coincidencias:[/bold orange3]")
+                            console.print("\n[bold khaki1]No se encontró un anime con ese nombre exacto, pero encontramos coincidencias:[/bold khaki1]")
                             for name in matches['name']:
                                 console.print(f"- {name}")
                             console.print("\nPor favor, intenta escribir el nombre nuevamente.")
@@ -95,7 +95,7 @@ def main():
                 user_ratings = ratings_df[ratings_df['user_id'] == user_id]
 
                 if user_ratings.empty:
-                    console.print(f"\n[bold orange3]El usuario {user_id} no tiene animes calificados aún.[/bold orange3]")
+                    console.print(f"\n[bold khaki1]El usuario {user_id} no tiene animes calificados aún.[/bold khaki1]")
                 else:
                     console.print(f"\n[bold aquamarine1]Animes calificados por el usuario {user_id}:[/bold aquamarine1]")
                     console.print("=" * 40)
@@ -105,7 +105,7 @@ def main():
                         how='left'
                     )
                     for _, row in merged.iterrows():
-                        console.print(f"{row['name']} — Calificación: [bold orange3]{row['rating']}[/bold orange3]")
+                        console.print(f"{row['name']} — Calificación: [bold khaki1]{row['rating']}[/bold khaki1]")
 
             elif opcion == "3":
                 break
