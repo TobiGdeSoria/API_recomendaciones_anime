@@ -113,10 +113,8 @@ def main():
 
             elif opcion == "4":
                 while True:
-                    nombre_anime = input("Escriba el nombre del anime a calificar (o 'quit' para volver): ").strip()
-                    if nombre_anime.lower() == 'quit':
-                        break
-
+                    nombre_anime = input("Escriba el nombre del anime a calificar: ").strip()
+                    
                     lower_input = nombre_anime.lower()
                     matches = recomendacion.animes[
                         recomendacion.animes['name'].str.lower().str.contains(lower_input, na=False)
