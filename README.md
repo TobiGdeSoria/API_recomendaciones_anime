@@ -49,11 +49,17 @@ python main.py
 - Elije entre las opciones del menú:
         - Obtener recomendaciones.
                 - Ingresa el **nombre de un anime** que te guste.
-                    - En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
+                      ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
                 - Ingresa una **calificación** para ese anime (1–10).
                 - Visualiza las **15 principales recomendaciones**.
         - Ver tus animes calificados.
         - Cambiar de usuario.
+        - Agregar/Actualizar calificación de un anime.
+                - Ingresa el **nombre de un anime** que quieras calificar o actualizar la calificación.
+                        ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
+
+                - Ingresa una nueva **calificación** para ese anime (1–10).
+        - Salir.
 
 ---
 
