@@ -14,7 +14,6 @@ class AnimeRecomendacion:
         self._load_data()
 
     def _load_data(self):
-        # Load ratings and anime data
         r_cols = ['user_id', 'anime_id', 'rating']
         a_cols = ['anime_id', 'name']
 
@@ -28,15 +27,12 @@ class AnimeRecomendacion:
         )
         self.animes['name'] = self.animes['name'].apply(html.unescape)
 
-        # Check if cached correlation matrix exists
         if os.path.exists(self.cache_file):
             with open(self.cache_file, "rb") as f:
                 self.corrMatrix = pickle.load(f)
         else:
-            # Pivot user ratings and compute correlation matrix
             userRatings = self.ratings.pivot_table(index='user_id', columns='anime_id', values='rating')
             self.corrMatrix = userRatings.corr(method='pearson', min_periods=500)
-            # Save correlation matrix to cache
             with open(self.cache_file, "wb") as f:
                 pickle.dump(self.corrMatrix, f)
 

@@ -13,19 +13,17 @@ console = Console()
 
 
 def main():
-    # Show loading spinner while training
-    console.print("[bold cyan]Cargando y entrenando el sistema de recomendaciones.[/bold cyan]")
+    console.print("[bold aquamarine1]Cargando y entrenando el sistema de recomendaciones.[/bold aquamarine1]")
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
         transient=True,
         console=console
     ) as progress:
-        progress.add_task(description="Entrenando el algoritmo (esto puede tardar unos minutos)...", total=None)
+        progress.add_task(description="Entrenando el algoritmo (esto puede tardar un rato)...", total=None)
         recomendacion = AnimeRecomendacion(DIRECTORIO_RATINGS, DIRECTORIO_ANIME)
     console.print("[bold green]Entrenamiento completado.[/bold green]")
 
-    # Load ratings
     ratings_df = pd.read_csv(DIRECTORIO_RATINGS)
 
     while True:
@@ -41,10 +39,10 @@ def main():
             continue
 
         user_id = int(user_input)
-        console.print(f"ID de usuario ingresado: [bold yellow]{user_id}[/bold yellow]")
+        console.print(f"ID de usuario ingresado: [bold orange3]{user_id}[/bold orange3]")
 
         while True:
-            console.print("\n[bold magenta]--- MENÚ ---[/bold magenta]")
+            console.print("\n[bold light_steel_blue]--- MENÚ ---[/bold light_steel_blue]")
             console.print("1.- Obtener recomendaciones (JSON)")
             console.print("2.- Ver animes calificados")
             console.print("3.- Cambiar de usuario")
@@ -65,7 +63,7 @@ def main():
 
                     if nombre_anime.lower() not in recomendacion.animes['name'].str.lower().values:
                         if not matches.empty:
-                            console.print("\n[bold yellow]No se encontró un anime con ese nombre exacto, pero encontramos coincidencias:[/bold yellow]")
+                            console.print("\n[bold orange3]No se encontró un anime con ese nombre exacto, pero encontramos coincidencias:[/bold orange3]")
                             for name in matches['name']:
                                 console.print(f"- {name}")
                             console.print("\nPor favor, intenta escribir el nombre nuevamente.")
@@ -83,13 +81,12 @@ def main():
                     console.print("[bold red]Input inválido. Por favor inserte un número del 1 al 10.[/bold red]")
                     continue
 
-                # Get recommendations
                 recomendaciones = recomendacion.get_recommendations(nombre_anime, rating_value)
 
                 if recomendaciones is None or recomendaciones.empty:
                     console.print(f"[bold red]El anime '{nombre_anime}' no se pudo recomendar por falta de datos o no existe.[/bold red]")
                 else:
-                    console.print("\n[bold cyan]Top 10 recomendaciones:[/bold cyan]")
+                    console.print("\n[bold aquamarine1]Top 10 recomendaciones:[/bold aquamarine1]")
                     console.print("=" * 40)
                     for _, row in recomendaciones.iterrows():
                         console.print(f"{row['name']} (score: {row['score']:.2f})")
@@ -98,9 +95,9 @@ def main():
                 user_ratings = ratings_df[ratings_df['user_id'] == user_id]
 
                 if user_ratings.empty:
-                    console.print(f"\n[bold yellow]El usuario {user_id} no tiene animes calificados aún.[/bold yellow]")
+                    console.print(f"\n[bold orange3]El usuario {user_id} no tiene animes calificados aún.[/bold orange3]")
                 else:
-                    console.print(f"\n[bold cyan]Animes calificados por el usuario {user_id}:[/bold cyan]")
+                    console.print(f"\n[bold aquamarine1]Animes calificados por el usuario {user_id}:[/bold aquamarine1]")
                     console.print("=" * 40)
                     merged = user_ratings.merge(
                         recomendacion.animes[['anime_id', 'name']],
@@ -108,7 +105,7 @@ def main():
                         how='left'
                     )
                     for _, row in merged.iterrows():
-                        console.print(f"{row['name']} — Calificación: [bold yellow]{row['rating']}[/bold yellow]")
+                        console.print(f"{row['name']} — Calificación: [bold orange3]{row['rating']}[/bold orange3]")
 
             elif opcion == "3":
                 break
