@@ -16,11 +16,16 @@ Esta es una aplicación en Python que sugiere los mejores animes basados en las 
 - Python 3.8+
 - pandas
 - rich
+- fastapi
+- uvicorn
+- requests
 
 Instalar paquetes necesarios con pip:
 
 pip install pandas
 pip install rich
+pip install fastapi uvicorn
+pip install requests
 
 ---
 
