@@ -24,7 +24,8 @@ Instalar paquetes necesarios con pip:
 
 pip install pandas
 pip install rich
-pip install fastapi uvicorn
+pip install fastapi 
+pip install uvicorn
 pip install requests
 
 ---
@@ -34,6 +35,7 @@ pip install requests
 /api_recomendaciones_anime
 - main.py                 # Programa principal con interacción del usuario
 - corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida) **--> aparece una vez ejecutada la aplicación por primera vez**
+- api.py                  # Permite al programa acceder a la logica de recomendaciones.
 - reccs.py                # Clase AnimeRecomendacion (lógica de recomendaciones)
 - rating_limpiado.csv     # Archivo CSV de calificaciones de usuarios
 - anime.csv               # Archivo CSV de información de anime
@@ -92,6 +94,7 @@ Dragon Ball GT (score: 4.08)
 - Los nombres de los animes no distinguen entre mayúsculas y minúsculas.
 - Las calificaciones deben ser números del 1 al 10. El programa no dejará insertar otro numero.
 - Si un anime no se encuentra en la base de datos, la aplicación solicitará otro.
+- Depende de la maquina del usuario, la matriz de correlación puede llegar a tardar cierto tiempo.
 
 ---
 
