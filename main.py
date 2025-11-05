@@ -43,7 +43,7 @@ def main():
 
         while True:
             console.print("\n[bold steel_blue1]--- MENÚ ---[/bold steel_blue1]")
-            console.print("1.- Obtener recomendaciones (JSON)")
+            console.print("1.- Obtener recomendaciones")
             console.print("2.- Ver animes calificados")
             console.print("3.- Cambiar de usuario")
             console.print("4.- Agregar/Actualizar calificación de un anime")

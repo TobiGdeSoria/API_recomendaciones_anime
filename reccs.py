@@ -41,7 +41,6 @@ class AnimeRecomendacion:
             pickle.dump(self.corrMatrix, f)
 
     def update_correlation(self, ratings_df):
-        """Recompute the correlation matrix after adding new ratings."""
         self._compute_correlation(ratings_df)
 
     def get_recommendations(self, anime_name, rating_value):
