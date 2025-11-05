@@ -26,20 +26,20 @@ pip install rich
 
 ## ESTRUCTURA DE ARCHIVOS
 
-.
-├── main.py                 # Programa principal con interacción del usuario
-├── corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida) **--> aparece una vez ejecutada la aplicación por primera vez**
-├── reccs.py                # Clase AnimeRecomendacion (lógica de recomendaciones)
-├── rating_limpiado.csv     # Archivo CSV de calificaciones de usuarios
-├── anime.csv               # Archivo CSV de información de anime
-└── README.md               # Este archivo
+/api_recomendaciones_anime
+- main.py                 # Programa principal con interacción del usuario
+- corr_matrix.pkl         # Matriz de correlación para que el programa solo entrene el algoritmo la primera vez (hace la app mas rápida) **--> aparece una vez ejecutada la aplicación por primera vez**
+- reccs.py                # Clase AnimeRecomendacion (lógica de recomendaciones)
+- rating_limpiado.csv     # Archivo CSV de calificaciones de usuarios
+- anime.csv               # Archivo CSV de información de anime
+- README.md               # Este archivo
 
 ---
 
 ## USO
 
-1. Asegúrate de que los archivos CSV (`rating_limpiado.csv` y `anime.csv`) estén en el directorio del proyecto.
-2. Ejecuta la aplicación:
+1. Asegurar que los archivos .CSV (`rating_limpiado.csv` y `anime.csv`) estén en el directorio del proyecto.
+2. Ejecutar la aplicación:
 
 python main.py
 
@@ -49,15 +49,14 @@ python main.py
 - Elije entre las opciones del menú:
         - Obtener recomendaciones.
                 - Ingresa el **nombre de un anime** que te guste.
-                      ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
+                      ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. 
                 - Ingresa una **calificación** para ese anime (1–10).
-                - Visualiza las **15 principales recomendaciones**.
+                - Visualiza las **10 principales recomendaciones**.
         - Ver tus animes calificados.
         - Cambiar de usuario.
         - Agregar/Actualizar calificación de un anime.
                 - Ingresa el **nombre de un anime** que quieras calificar o actualizar la calificación.
-                        ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. Encontrando así el anime que buscas. 
-
+                        ^En caso de no saber el nombre, puedes escribir una parte y el buscador te puede dar un listado de animes que coinciden. 
                 - Ingresa una nueva **calificación** para ese anime (1–10).
         - Salir.
 
@@ -86,7 +85,7 @@ Dragon Ball GT (score: 4.08)
 ## NOTAS
 
 - Los nombres de los animes no distinguen entre mayúsculas y minúsculas.
-- Las calificaciones deben ser números del 1 al 10.
+- Las calificaciones deben ser números del 1 al 10. El programa no dejará insertar otro numero.
 - Si un anime no se encuentra en la base de datos, la aplicación solicitará otro.
 
 ---
